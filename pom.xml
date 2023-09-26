@@ -11,7 +11,7 @@
   <groupId>com.sberhealth.plugins</groupId>
   <artifactId>nexus-sberhealth-security-plugin</artifactId>
   <version>${revision}</version>
-  <packaging>pom</packaging>
+  <packaging>bundle</packaging>
 
   <name>Nexus SberHealth Security</name>
 
@@ -36,6 +36,7 @@
   </properties>
 
   <build>
+    <finalName>nexus-sberhealth-security-plugin</finalName>
     <pluginManagement>
       <plugins>
         <plugin>
@@ -46,6 +47,56 @@
       </plugins>
     </pluginManagement>
     <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>default-bundle</id>
+            <phase>package</phase>
+            <goals>
+              <goal>bundle</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <instructions>
+            <Bundle-SymbolicName>nexus-sberhealth-security-plugin</Bundle-SymbolicName>
+            <Bundle-Description>nexus-sberhealth-security-plugin</Bundle-Description>
+            <Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
+            <Embed-Transitive>true</Embed-Transitive>
+            <Export-Package>
+              retrofit2,
+              retrofit2.http,
+              okhttp3,
+              okio
+            </Export-Package>
+            <Import-Package>
+              retrofit2,
+              retrofit2.http,
+              com.fasterxml.jackson.*,
+              javax.inject,
+              javax.net,
+              javax.net.ssl,
+              org.slf4j,
+              org.osgi.framework,
+              org.sonatype.nexus.*
+            </Import-Package>
+            <Include-Resource>target/classes,{maven-resources}</Include-Resource>
+          </instructions>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.karaf.tooling</groupId>
+        <artifactId>karaf-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <useSystemClassLoader>false</useSystemClassLoader>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -58,8 +109,42 @@
     </plugins>
   </build>
 
-  <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>org.sonatype.nexus</groupId>
+        <artifactId>nexus-capability</artifactId>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.sonatype.nexus</groupId>
+        <artifactId>nexus-core</artifactId>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.sonatype.nexus</groupId>
+        <artifactId>nexus-plugin-api</artifactId>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.sonatype.nexus</groupId>
+        <artifactId>nexus-repository</artifactId>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.sonatype.nexus</groupId>
+        <artifactId>nexus-rapture</artifactId>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.sonatype.nexus</groupId>
+        <artifactId>nexus-security</artifactId>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.sonatype.nexus.plugins</groupId>
+        <artifactId>nexus-repository-maven</artifactId>
+        <scope>provided</scope>
+      </dependency>
       <dependency>
         <groupId>com.google.code.findbugs</groupId>
         <artifactId>jsr305</artifactId>
@@ -86,7 +171,6 @@
         <version>${version.junit5}</version>
       </dependency>
     </dependencies>
-  </dependencyManagement>
 
   <repositories>
     <repository>
