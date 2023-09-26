@@ -1,1 +1,1 @@
-# Nexus Snyk Security Plugin
+# Nexus Sberhealth Security Plugin

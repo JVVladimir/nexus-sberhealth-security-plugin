@@ -5,15 +5,15 @@
   <parent>
     <groupId>org.sonatype.nexus.plugins</groupId>
     <artifactId>nexus-plugins</artifactId>
-    <version>3.15.0-01</version>
+    <version>3.37.3-02</version>
   </parent>
 
-  <groupId>io.snyk.plugins</groupId>
-  <artifactId>nexus-snyk-security-plugin</artifactId>
+  <groupId>com.sberhealth.plugins</groupId>
+  <artifactId>nexus-sberhealth-security-plugin</artifactId>
   <version>${revision}</version>
   <packaging>pom</packaging>
 
-  <name>Nexus Snyk Security :: Aggregator</name>
+  <name>Nexus SberHealth Security</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -87,11 +87,6 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
-  <modules>
-    <module>plugin</module>
-    <module>snyk-sdk</module>
-  </modules>
 
   <repositories>
     <repository>

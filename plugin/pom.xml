@@ -3,24 +3,18 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>io.snyk.plugins</groupId>
-    <artifactId>nexus-snyk-security-plugin</artifactId>
+    <groupId>com.sberhealth.plugins</groupId>
+    <artifactId>nexus-sberhealth-security-plugin</artifactId>
     <version>${revision}</version>
   </parent>
 
-  <groupId>io.snyk.plugins.nexus</groupId>
+  <groupId>com.sberhealth.plugins.nexus</groupId>
   <artifactId>plugin</artifactId>
   <packaging>bundle</packaging>
 
-  <name>Nexus Snyk Security :: Plugin</name>
+  <name>Nexus SberHealth Security :: Plugin</name>
 
   <dependencies>
-    <dependency>
-      <groupId>io.snyk</groupId>
-      <artifactId>sdk</artifactId>
-      <version>${revision}</version>
-      <scope>compile</scope>
-    </dependency>
     <dependency>
       <groupId>org.sonatype.nexus</groupId>
       <artifactId>nexus-capability</artifactId>
@@ -79,7 +73,7 @@
   </dependencies>
 
   <build>
-    <finalName>nexus-snyk-security-plugin</finalName>
+    <finalName>nexus-sberhealth-security-plugin</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.felix</groupId>
@@ -95,20 +89,17 @@
         </executions>
         <configuration>
           <instructions>
-            <Bundle-SymbolicName>nexus-snyk-security-plugin</Bundle-SymbolicName>
-            <Bundle-Description>nexus-snyk-security-plugin</Bundle-Description>
+            <Bundle-SymbolicName>nexus-sberhealth-security-plugin</Bundle-SymbolicName>
+            <Bundle-Description>nexus-sberhealth-security-plugin</Bundle-Description>
             <Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
             <Embed-Transitive>true</Embed-Transitive>
             <Export-Package>
-              io.snyk.sdk.api.v1,
-              io.snyk.sdk.model,
               retrofit2,
               retrofit2.http,
               okhttp3,
               okio
             </Export-Package>
             <Import-Package>
-              io.snyk.sdk.model,
               retrofit2,
               retrofit2.http,
               com.fasterxml.jackson.*,
