@@ -35,9 +35,7 @@ public class ScannerHandler implements ContributedHandler {
   @Nonnull
   @Override
   public Response handle(@Nonnull Context context) throws Exception {
-    LOG.info("I m work, before handle Vova!!!");
     Response response = context.proceed();
-    LOG.info("I m work, handle Vova!!!");
 //    if (!configurationHelper.isCapabilityEnabled()) {
 //      LOG.debug("SnykSecurityCapability is not enabled.");
 //      return response;
@@ -50,7 +48,7 @@ public class ScannerHandler implements ContributedHandler {
     }
 
     Payload payload = response.getPayload();
-    ScanResult scanResult = null;
+    ScanResult scanResult;
     String repositoryFormat = repository.getFormat().getValue();
     switch (repositoryFormat) {
       case "maven2": {

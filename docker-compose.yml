@@ -9,4 +9,4 @@ services:
       - "8081:8081"
       - "8082:8082"
     volumes:
-      - "./.nexus/deploy:/opt/sonatype/nexus/deploy"
+      - "./.nexus:/opt/sonatype/nexus/deploy"

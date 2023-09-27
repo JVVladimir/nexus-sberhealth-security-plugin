@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.sonatype.nexus.plugins</groupId>
     <artifactId>nexus-plugins</artifactId>
-    <version>3.37.3-02</version>
+    <version>3.32.1-01</version>
   </parent>
 
   <groupId>com.sberhealth.plugins</groupId>
@@ -24,7 +24,7 @@
     <project.targetCompatibility>1.8</project.targetCompatibility>
 
     <!-- will be overridden in CD pipeline -->
-    <revision>LOCAL-SNAPSHOT</revision>
+    <revision>1.0.0-SNAPSHOT</revision>
 
     <!--
      | dependency and plugin versions, please keep alphabetical.

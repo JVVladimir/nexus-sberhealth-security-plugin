@@ -13,6 +13,8 @@ import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import static java.lang.String.format;
+
 @Named
 public class MavenScanner {
   private static final Logger LOG = LoggerFactory.getLogger(MavenScanner.class);
@@ -27,7 +29,7 @@ public class MavenScanner {
   }
 
   ScanResult scan(@Nonnull Context context, Payload payload) {
-    LOG.info("I m work, Vova!!!");
+    LOG.info("Handle maven proxy repository");
     Object mavenPathAttribute = context.getAttributes().get(MavenPath.class.getName());
     if (!(mavenPathAttribute instanceof MavenPath)) {
       LOG.warn("Could not extract maven path from {}", context.getRequest().getPath());
@@ -40,6 +42,11 @@ public class MavenScanner {
     if (coordinates == null) {
       LOG.warn("Coordinates are null for {}", parsedMavenPath);
       return null;
+    }
+
+    LOG.info("GroupId: {}, ArtifactId: {}, Version: {}", coordinates.getGroupId(), coordinates.getArtifactId(), coordinates.getVersion());
+    if (coordinates.getArtifactId().equals("spring-boot-starter-webflux")) {
+      throw new RuntimeException(format("Artifact '%s' has problem issues", context.getRequest().getPath()));
     }
 
     if (!"jar".equals(coordinates.getExtension())) {
